@@ -26,8 +26,10 @@ AZUL = (0, 0, 255) #Jugador
 fuente = pygame.font.SysFont("Arial", 36)
 
 # Jugador
-jugador_img = pygame.Surface((50, 30))
-jugador_img.fill(AZUL) #Colorear el jugador
+# Cargar imagen del jugador
+jugador_img = pygame.image.load("7445441.png")  # ruta de la imagen
+# Escalar la imagen al tamaño que se solicite
+jugador_img = pygame.transform.scale(jugador_img, (50, 30))
 jugador_x = ANCHO // 2 #Coordena del eje X
 jugador_y = ALTO - 50 #Coordena del eje Y
 velocidad_jugador = 7  #Velocidad de movimiento del jugador en dos dimensiones
