@@ -120,3 +120,40 @@ def dibujar_juego(x, y, lista_balas, lista_enemigos):
     
     pygame.display.update()
 
+# -------- BUCLE PRINCIPAL --------
+clock = pygame.time.Clock() #Gestionar el tiempo del juego
+while True:
+    keys = pygame.key.get_pressed() #Obtener el valor de la tecla presionada
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit() #Cerrar el juego
+            sys.exit() #Cerrar la ventana de la linea de comandos
+
+    if menu_activo:
+        mostrar_menu()
+        if keys[pygame.K_1]:#En caso de presionar la tecla 1, iniciar el juego
+            menu_activo = False
+            juego_activo = True
+            puntaje = 0
+        elif keys[pygame.K_2]:#En caso de presionar la tecla 2, mostrar las instrucciones
+            menu_activo = False
+            instrucciones_activas = True
+        elif keys[pygame.K_3]: #En caso de presionar la tecla 3, salir del juego
+            pygame.quit()
+            sys.exit()
+
+    elif instrucciones_activas:
+        mostrar_instrucciones()
+        if keys[pygame.K_ESCAPE]: #En caso de presionar la tecla ESC, volver al menu
+            instrucciones_activas = False
+            menu_activo = True
+
+    elif juego_activo:#En caso de que el juego esté activo, se ejecutará todas las funciones para que el juego funcione
+        jugador_x = mover_jugador(keys, jugador_x)
+        disparar(keys, balas, jugador_x, jugador_y)
+        mover_balas(balas)
+        generar_enemigos(enemigos)
+        colisiones(balas, enemigos)
+        dibujar_juego(jugador_x, jugador_y, balas, enemigos)
+
+    clock.tick(60) #Evitan que se consuman muchos recursos del equipo
