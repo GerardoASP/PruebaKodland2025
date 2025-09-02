@@ -68,6 +68,9 @@ def mostrar_instrucciones():
     mostrar_texto("Mueve la nave con ← →", 200, 200)
     mostrar_texto("Dispara con ESPACIO", 200, 250)
     mostrar_texto("Pulsa ESC para volver al menú", 200, 350)
+    mostrar_texto("En caso de que seleccione el modo 1 y quiera salir", 200, 350)
+    mostrar_texto("Pulsa 4", 200, 250)
+    
     pygame.display.update()
 
 def mover_jugador(keys, x):
@@ -155,5 +158,7 @@ while True:
         generar_enemigos(enemigos)
         colisiones(balas, enemigos)
         dibujar_juego(jugador_x, jugador_y, balas, enemigos)
+        if keys[pygame.K_4]: #En caso de presionar la tecla ESC, volver al menu
+            sys.exit()
 
     clock.tick(60) #Evitan que se consuman muchos recursos del equipo
